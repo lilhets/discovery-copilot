@@ -1,0 +1,35 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "requirements.schema.json",
+  "title": "Step 1 output: requirements",
+  "type": "object",
+  "required": ["requirements"],
+  "additionalProperties": false,
+  "properties": {
+    "requirements": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/requirement" }
+    }
+  },
+  "$defs": {
+    "requirement": {
+      "type": "object",
+      "required": ["id", "type", "category", "statement", "evidence_quote", "confidence"],
+      "additionalProperties": false,
+      "properties": {
+        "id": { "$ref": "common.schema.json#/$defs/requirement_id" },
+        "type": { "enum": ["functional", "non_functional"] },
+        "category": {
+          "enum": ["feature", "users", "scale", "latency", "availability", "data", "compliance", "budget", "timeline", "other"]
+        },
+        "statement": { "type": "string", "minLength": 1 },
+        "evidence_quote": {
+          "description": "Verbatim quote from the transcript that supports the statement.",
+          "type": "string",
+          "minLength": 1
+        },
+        "confidence": { "$ref": "common.schema.json#/$defs/confidence" }
+      }
+    }
+  }
+}

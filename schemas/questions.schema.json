@@ -1,0 +1,47 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "questions.schema.json",
+  "title": "Step 2 output: clarifying questions",
+  "type": "object",
+  "required": ["questions"],
+  "additionalProperties": false,
+  "properties": {
+    "questions": {
+      "description": "Ranked by impact on the design, highest first.",
+      "type": "array",
+      "items": { "$ref": "#/$defs/question" }
+    }
+  },
+  "$defs": {
+    "question": {
+      "type": "object",
+      "required": ["id", "question", "missing_info", "why_it_matters", "priority", "requirement_ids", "status", "confidence"],
+      "additionalProperties": false,
+      "properties": {
+        "id": { "$ref": "common.schema.json#/$defs/question_id" },
+        "question": {
+          "description": "The question as it would be asked to the customer.",
+          "type": "string",
+          "minLength": 1
+        },
+        "missing_info": { "type": "string", "minLength": 1 },
+        "why_it_matters": { "type": "string", "minLength": 1 },
+        "priority": { "enum": ["high", "medium", "low"] },
+        "requirement_ids": {
+          "description": "Requirements this question would clarify. Empty when the information is missing entirely.",
+          "type": "array",
+          "items": { "$ref": "common.schema.json#/$defs/requirement_id" }
+        },
+        "status": { "enum": ["open", "answered"] },
+        "answered_in": {
+          "description": "Version of the meeting where the question was answered.",
+          "$ref": "common.schema.json#/$defs/version"
+        },
+        "confidence": { "$ref": "common.schema.json#/$defs/confidence" }
+      },
+      "if": { "properties": { "status": { "const": "answered" } } },
+      "then": { "required": ["answered_in"] },
+      "else": { "not": { "required": ["answered_in"] } }
+    }
+  }
+}

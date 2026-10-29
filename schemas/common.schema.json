@@ -1,0 +1,31 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "common.schema.json",
+  "title": "Shared definitions",
+  "$defs": {
+    "version": {
+      "description": "Meeting version of run_state: v0 after the first meeting, v1 after the second, and so on.",
+      "type": "string",
+      "pattern": "^v[0-9]+$"
+    },
+    "requirement_id": {
+      "description": "Stable requirement ID. Never renumbered or reused across versions.",
+      "type": "string",
+      "pattern": "^R[1-9][0-9]*$"
+    },
+    "question_id": {
+      "description": "Stable question ID. Never renumbered or reused across versions.",
+      "type": "string",
+      "pattern": "^Q[1-9][0-9]*$"
+    },
+    "confidence": {
+      "type": "object",
+      "required": ["level", "reason"],
+      "additionalProperties": false,
+      "properties": {
+        "level": { "enum": ["high", "medium", "low"] },
+        "reason": { "type": "string", "minLength": 1 }
+      }
+    }
+  }
+}
