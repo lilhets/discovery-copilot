@@ -1,0 +1,13 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "run_state.schema.json",
+  "title": "run_state",
+  "description": "The object passed between pipeline steps. Each step adds its own fields. Fields for steps 3 to 7 are added with those steps.",
+  "type": "object",
+  "required": ["version"],
+  "properties": {
+    "version": { "$ref": "common.schema.json#/$defs/version" },
+    "requirements": { "$ref": "requirements.schema.json#/properties/requirements" },
+    "questions": { "$ref": "questions.schema.json#/properties/questions" }
+  }
+}
