@@ -22,7 +22,7 @@ This project automates the first draft of that work, while keeping every choice 
 
 **Discovery-to-Architecture Copilot cuts the time from first customer call to first architecture draft from days to minutes**
 
-Presales engineers spend hours after every discovery call rereading notes, chasing missing information and drafting a first architecture. Discovery-to-Architecture Copilot takes the transcript of a discovery call and returns, in under a minute: the customer's requirements in a structured form, the questions still to ask, a recommended deployment model, an AWS architecture with sources for every choice, a security review, a monthly cost estimate and an opportunity record ready to paste into a CRM.
+Presales engineers spend hours after every discovery call rereading notes, chasing missing information and drafting a first architecture. Discovery-to-Architecture Copilot takes the transcript of a discovery call and returns, in under a minute: the customer's requirements in a structured form, the questions still to ask, a recommended deployment model, a first architecture hypothesis with sources for every choice, a security review, a monthly cost estimate and an opportunity record ready to paste into a CRM.
 
 Every output is traceable. Each architecture choice links to the requirement that motivated it and to the source that supports it. When the transcript doesn't contain enough information, the copilot says so and asks, instead of guessing.
 
@@ -51,9 +51,9 @@ Every output is traceable. Each architecture choice links to the requirement tha
 | # | Output | Description |
 |---|---|---|
 | 1 | Requirements | Functional and non-functional (users, scale, latency, availability, data, compliance, budget, timeline), each with a quote from the transcript |
-| 2 | Clarifying questions | What's missing or ambiguous, ranked by impact on the design |
+| 2 | Clarifying questions | What's missing or ambiguous, ranked by impact on the design. The main input for the next customer meeting |
 | 3 | Deployment model | Public cloud, hybrid or on-prem, with justification |
-| 4 | Architecture | AWS services per component, mapped to requirements, with citations, plus a Mermaid diagram |
+| 4 | Architecture hypothesis (v0) | A first design to validate in the next meeting: AWS services per component, mapped to requirements, with citations, plus a Mermaid diagram. If key information is missing, it proposes options instead of a single design |
 | 5 | Security review | Risks in the proposed design (exposure, IAM, encryption, data residency) and fixes |
 | 6 | Cost estimate | Monthly estimate per component, with assumptions stated |
 | 7 | Opportunity record | CRM-style JSON: customer need, stakeholders, requirements, next steps |
@@ -175,5 +175,4 @@ discovery-copilot/
 - [ ] Steps 5 to 7: security review, cost, opportunity record
 - [ ] Evaluation harness and observability dashboard
 - [ ] Guardrails, API and front end
-
-**Later:** Azure / GCP version, infrastructure-as-code generation, audio input, CRM integration, model comparison on quality and cost.
+- [ ] Multi-meeting updates: each new transcript updates the state and versions the architecture (v0 → v1) with a changelog
