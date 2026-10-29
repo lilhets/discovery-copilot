@@ -1,0 +1,132 @@
+{
+  "scenario": "01_ludora",
+  "transcript": "transcripts/scenarios/01_ludora.txt",
+  "requirements": [
+    {
+      "id": "R1",
+      "type": "functional",
+      "category": "feature",
+      "statement": "Migrate the existing PHP / MySQL web shop as is, without a rewrite.",
+      "evidence_quote": "we'd like to keep the PHP application for now. We can't rewrite everything before September",
+      "confidence": { "level": "high", "reason": "Stated explicitly by the CTO and confirmed by the presales summary." }
+    },
+    {
+      "id": "R2",
+      "type": "non_functional",
+      "category": "scale",
+      "statement": "Around 40,000 visits per day normally, up to about 400,000 per day (10x) during Black Friday and sales, mostly in the evening.",
+      "evidence_quote": "On a normal day we're around 40,000 visits. During Black Friday or the winter sales it's more like ten times that.",
+      "confidence": { "level": "high", "reason": "Figures given explicitly, even if approximate." }
+    },
+    {
+      "id": "R3",
+      "type": "non_functional",
+      "category": "availability",
+      "statement": "The shop must stay up during sales peaks. Short night-time downtime is acceptable the rest of the year.",
+      "evidence_quote": "The site cannot go down during the sales.",
+      "confidence": { "level": "medium", "reason": "Need is clear but no availability target was given." }
+    },
+    {
+      "id": "R4",
+      "type": "non_functional",
+      "category": "latency",
+      "statement": "Product pages must load in under two seconds, including on mobile.",
+      "evidence_quote": "We'd like product pages to load in under two seconds.",
+      "confidence": { "level": "high", "reason": "Explicit numeric target." }
+    },
+    {
+      "id": "R5",
+      "type": "non_functional",
+      "category": "data",
+      "statement": "About 2 TB of high resolution product images, growing every season.",
+      "evidence_quote": "All together it's around 2 terabytes of images today, and it grows every season",
+      "confidence": { "level": "high", "reason": "Volume stated explicitly." }
+    },
+    {
+      "id": "R6",
+      "type": "non_functional",
+      "category": "data",
+      "statement": "The shop stores customer personal data: accounts, names, delivery addresses, emails and order history.",
+      "evidence_quote": "Accounts, names, delivery addresses, emails, order history.",
+      "confidence": { "level": "high", "reason": "Listed explicitly by the CTO." }
+    },
+    {
+      "id": "R7",
+      "type": "non_functional",
+      "category": "compliance",
+      "statement": "Customer data must stay in the EU (GDPR).",
+      "evidence_quote": "we're under GDPR, so for us the customer data has to stay in the EU. That's not negotiable.",
+      "confidence": { "level": "high", "reason": "Stated as non-negotiable, backed by legal advice." }
+    },
+    {
+      "id": "R8",
+      "type": "non_functional",
+      "category": "compliance",
+      "statement": "Payments are handled by Stripe. Card data is never stored by the shop.",
+      "evidence_quote": "Payments go through Stripe, so we never see or store card numbers.",
+      "confidence": { "level": "high", "reason": "Stated explicitly as a deliberate choice." }
+    },
+    {
+      "id": "R9",
+      "type": "functional",
+      "category": "feature",
+      "statement": "Sync stock from the on-premises warehouse ERP (Lyon) to the shop in near real time, instead of every 15 minutes.",
+      "evidence_quote": "Ideally yes, near real time.",
+      "confidence": { "level": "medium", "reason": "Need is clear but the ERP interface is unknown." }
+    },
+    {
+      "id": "R10",
+      "type": "non_functional",
+      "category": "other",
+      "statement": "Use managed services as much as possible. The three-person team does not want to manage servers.",
+      "evidence_quote": "If we move, it has to be managed services as much as possible.",
+      "confidence": { "level": "high", "reason": "Stated explicitly as a condition for moving." }
+    },
+    {
+      "id": "R11",
+      "type": "non_functional",
+      "category": "timeline",
+      "statement": "Live by September next year, a couple of months before the next Black Friday.",
+      "evidence_quote": "Ideally we want it live by September next year",
+      "confidence": { "level": "high", "reason": "Date given explicitly, tied to Black Friday." }
+    },
+    {
+      "id": "R12",
+      "type": "non_functional",
+      "category": "budget",
+      "statement": "Roughly the current 3,000 EUR per month on average. Higher cost during peaks is acceptable, doubling all year is not.",
+      "evidence_quote": "Today we pay around 3,000 euros a month for the hosting.",
+      "confidence": { "level": "medium", "reason": "Order of magnitude given, but no hard ceiling and no mention of migration costs." }
+    }
+  ],
+  "missing_info": [
+    {
+      "id": "M1",
+      "missing_info": "No availability target (SLA percentage) during or outside peaks.",
+      "requirement_ids": ["R3"],
+      "evidence_quote": "We've never put a number on it.",
+      "blocking": true
+    },
+    {
+      "id": "M2",
+      "missing_info": "How the ERP exposes stock data (API, files, database access) and who owns it.",
+      "requirement_ids": ["R9"],
+      "evidence_quote": "I think there's an API but I'd have to check with Marc",
+      "blocking": true
+    },
+    {
+      "id": "M3",
+      "missing_info": "Backup and recovery requirements (RPO / RTO). Restores have never been tested.",
+      "requirement_ids": [],
+      "evidence_quote": "I've never actually tested a restore, to be honest.",
+      "blocking": false
+    }
+  ],
+  "should_not_extract": [
+    {
+      "item": "Mobile app",
+      "reason": "Mentioned as a future idea, explicitly out of scope for this project.",
+      "evidence_quote": "But that's really not for now, it's more an idea for later."
+    }
+  ]
+}
