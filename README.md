@@ -108,7 +108,7 @@ Each step = one prompt + one JSON output schema + one Lambda function. Steps pas
 | Step | Input | Output (JSON) |
 |---|---|---|
 | 1. Extract requirements | Transcript | `requirements[]` with `id` (R1, R2...), `type`, `category`, `statement`, `evidence_quote`, `confidence` |
-| 2. Clarifying questions | Transcript + requirements | `questions[]` with `id` (Q1, Q2...), `question`, `missing_info`, `why_it_matters`, `priority`, `requirement_ids[]`, `status` (open / answered), `confidence` |
+| 2. Clarifying questions | Transcript + requirements | `questions[]` with `id` (Q1, Q2...), `question`, `missing_info`, `why_it_matters`, `priority`, `blocking`, `requirement_ids[]`, `status` (open / answered), `confidence` |
 | 3. Deployment model | Requirements | `deployment` with `model`, `drivers[]` |
 | 4. Architecture mapping | Requirements + deployment + retrieval | `components[]` with `service`, `purpose`, `requirement_ids[]`, `citations[]` + diagram |
 | 5. Security review | Architecture | `findings[]` with `risk`, `severity`, `fix` |

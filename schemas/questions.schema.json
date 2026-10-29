@@ -15,7 +15,7 @@
   "$defs": {
     "question": {
       "type": "object",
-      "required": ["id", "question", "missing_info", "why_it_matters", "priority", "requirement_ids", "status", "confidence"],
+      "required": ["id", "question", "missing_info", "why_it_matters", "priority", "blocking", "requirement_ids", "status", "confidence"],
       "additionalProperties": false,
       "properties": {
         "id": { "$ref": "common.schema.json#/$defs/question_id" },
@@ -27,6 +27,10 @@
         "missing_info": { "type": "string", "minLength": 1 },
         "why_it_matters": { "type": "string", "minLength": 1 },
         "priority": { "enum": ["high", "medium", "low"] },
+        "blocking": {
+          "description": "True when the design cannot move forward without the answer.",
+          "type": "boolean"
+        },
         "requirement_ids": {
           "description": "Requirements this question would clarify. Empty when the information is missing entirely.",
           "type": "array",
