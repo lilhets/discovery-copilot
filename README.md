@@ -103,12 +103,12 @@ Architecture decisions are documented as ADRs in [`docs/decisions/`](docs/decisi
 
 ## Pipeline
 
-Each step = one prompt + one JSON output schema + one Lambda function. Steps pass a single growing JSON object (`run_state`) to each other.
+Each step = one prompt + one JSON output schema + one Lambda function. Steps pass a single growing JSON object (`run_state`) to each other. `run_state` carries a `version` (v0 for the first meeting), and requirements and questions keep stable IDs across meetings ([ADR 0001](docs/decisions/0001-stable-ids-and-run-state-versioning.md)).
 
 | Step | Input | Output (JSON) |
 |---|---|---|
-| 1. Extract requirements | Transcript | `requirements[]` with `type`, `statement`, `evidence_quote`, `confidence` |
-| 2. Clarifying questions | Transcript + requirements | `questions[]` with `missing_info`, `why_it_matters`, `priority` |
+| 1. Extract requirements | Transcript | `requirements[]` with `id` (R1, R2...), `type`, `category`, `statement`, `evidence_quote`, `confidence` |
+| 2. Clarifying questions | Transcript + requirements | `questions[]` with `id` (Q1, Q2...), `question`, `missing_info`, `why_it_matters`, `priority`, `requirement_ids[]`, `status` (open / answered), `confidence` |
 | 3. Deployment model | Requirements | `deployment` with `model`, `drivers[]` |
 | 4. Architecture mapping | Requirements + deployment + retrieval | `components[]` with `service`, `purpose`, `requirement_ids[]`, `citations[]` + diagram |
 | 5. Security review | Architecture | `findings[]` with `risk`, `severity`, `fix` |
