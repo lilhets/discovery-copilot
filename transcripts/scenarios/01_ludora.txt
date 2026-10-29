@@ -1,0 +1,102 @@
+Scenario 01: Ludora, online furniture retailer
+Type: classic cloud workload (web shop migration)
+Call: first discovery call, 45 minutes, video
+Participants:
+  - Presales: presales engineer
+  - Claire (CTO, Ludora)
+  - Hugo (Head of e-commerce, Ludora)
+All companies and people in this transcript are fictional.
+
+---
+
+[Presales] Thanks both for making the time. The idea today is really just to understand where you are and what you need, no slides. Maybe you can start by telling me a bit about Ludora?
+
+[Claire] Sure. So we sell furniture and home decor online, mostly in France, Belgium and Spain. We're about 120 people, but the tech team is small, it's me and two developers. Everything goes through the web shop, we don't have physical stores.
+
+[Presales] Okay. And what does the shop run on today?
+
+[Claire] It's a PHP application we built ourselves, quite a few years ago now, with a MySQL database. It's all hosted at a local hosting company on two dedicated servers. One for the app, one for the database.
+
+[Presales] And what's pushing you to look at a change now?
+
+[Hugo] Black Friday, honestly. Last year the site went down for about three hours on the Friday evening. That's our biggest day of the year, so you can imagine. We lost a lot of sales and a lot of customers were angry on social media.
+
+[Claire] The servers just couldn't keep up. And with dedicated servers we can't really add capacity quickly, we have to call the hosting company, it takes days.
+
+[Presales] Got it. Can you give me an idea of the traffic? On a normal day and on a peak day?
+
+[Hugo] On a normal day we're around 40,000 visits. During Black Friday or the winter sales it's more like ten times that. Something like 400,000 visits in a day, and most of it in the evening.
+
+[Presales] And the goal is that the shop stays up during those peaks.
+
+[Hugo] Yes, that's the number one thing. The site cannot go down during the sales. The rest of the year, a few minutes at night, okay, nobody dies. But not during the sales.
+
+[Presales] Do you have a target in mind, like a percentage of availability?
+
+[Claire] Not really, no. We've never put a number on it. I'd say as high as possible, but I guess that's not a very useful answer.
+
+[Presales] That's fine, we can work on that together. What about speed? Do you get complaints about performance?
+
+[Hugo] Yes, on mobile especially. Product pages are slow when there are a lot of photos. We'd like product pages to load in under two seconds. That's the number our marketing agency keeps telling us about for conversion.
+
+[Presales] Okay, under two seconds for product pages. You mentioned photos, how much media do you have?
+
+[Claire] A lot. Each product has maybe ten to fifteen high resolution photos. All together it's around 2 terabytes of images today, and it grows every season when we add the new collection.
+
+[Presales] And where are they stored now?
+
+[Claire] On the same server as the application. Which is probably part of the problem.
+
+[Presales] Probably, yes. Let's talk about the data side. What do you store about your customers?
+
+[Claire] The usual. Accounts, names, delivery addresses, emails, order history. Payments go through Stripe, so we never see or store card numbers. That was a deliberate choice.
+
+[Presales] That helps a lot. And are there constraints on where the data lives?
+
+[Claire] Yes, we're under GDPR, so for us the customer data has to stay in the EU. That's not negotiable. Our lawyer was very clear about that.
+
+[Presales] Understood. And how does the shop know what's in stock?
+
+[Claire] We have an ERP in the warehouse, it's on premises, in Lyon. Right now there's a script that syncs the stock to the shop every fifteen minutes. During the sales that's a problem, because we sell items that are already out of stock and then we have to cancel orders.
+
+[Hugo] Which customers really don't like.
+
+[Presales] So you'd want the stock to be closer to real time.
+
+[Claire] Ideally yes, near real time. But I don't know exactly how the ERP can expose the data. I think there's an API but I'd have to check with Marc, he's the one who manages the ERP.
+
+[Presales] No problem, we'll note that as something to check. Now, you said the team is three people. Who handles the servers, patching, backups, that kind of thing?
+
+[Claire] Mostly me, in the evenings. Which is part of why I want to change. We don't want to manage servers anymore. If we move, it has to be managed services as much as possible. My developers should be writing features, not patching Linux.
+
+[Presales] That's clear. On backups, what do you have today?
+
+[Claire] The hosting company does a backup every night, I think. I've never actually tested a restore, to be honest.
+
+[Presales] Okay. And timeline-wise, when would you like this to be live?
+
+[Hugo] Before next Black Friday, for sure. Ideally we want it live by September next year, so we have a couple of months to test before the peak.
+
+[Presales] September next year, okay. And budget? I know it's always a delicate question.
+
+[Claire] Today we pay around 3,000 euros a month for the hosting. We know the cloud can cost more during the peaks, that's fine, but we don't want to end up paying double all year round. Something in the same range on average would be good.
+
+[Presales] So roughly the same monthly budget on average, with some flexibility during peaks.
+
+[Claire] Yes, that's a good summary.
+
+[Hugo] Oh, and one more thing. At some point we'd like a mobile app too. But that's really not for now, it's more an idea for later. Maybe in two or three years.
+
+[Presales] Okay, I'll note it as a future idea, not part of this project. Anything else that's important for you?
+
+[Claire] I think we covered the main things. Maybe just that we'd like to keep the PHP application for now. We can't rewrite everything before September, we don't have the people for that.
+
+[Presales] Makes sense, so a migration of the existing application rather than a rebuild.
+
+[Claire] Exactly. Maybe we'll modernise some parts later, but first we need it to survive Black Friday.
+
+[Presales] Perfect. I'll send you a summary with what I understood and a list of questions, and we can schedule a second call to go through a first architecture.
+
+[Hugo] Sounds good, thanks.
+
+[Claire] Thanks, talk soon.
