@@ -4,7 +4,7 @@
 !.env.example
 *.pem
 
-# Local Claude Code instructions, kept on the developer's machine only
+# Local notes, kept on the developer machine only
 CLAUDE.md
 
 # Python
