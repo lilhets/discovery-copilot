@@ -4,6 +4,7 @@
 !.env.example
 *.pem
 
+# Local notes, kept on the developer machine only
 
 # Python
 __pycache__/
