@@ -1,0 +1,121 @@
+Scenario 02: Ateliers Verdan, precision parts manufacturer for aerospace
+Type: hybrid (new build with on-premises constraints)
+Call: first discovery call, 75 minutes, on site
+Participants:
+  - Presales: presales engineer
+  - Nathalie (Director of Operations, Ateliers Verdan)
+  - Julien (IT and OT infrastructure manager, Ateliers Verdan)
+  - Sophie (Information Security Officer, Ateliers Verdan)
+All companies and people in this transcript are fictional.
+
+---
+
+[Presales] Thank you all for joining. Today I'd like to understand your project and your constraints, not to present a solution. We'll go through the business context, then the technical side, then timing and budget, and I'll finish with a summary to make sure I got it right. We have about an hour and a quarter, does that work?
+
+[Nathalie] Yes, that's fine.
+
+[Presales] What problem are you trying to solve, and why now?
+
+[Nathalie] Unplanned machine breakdowns. When a CNC machine stops in the middle of a batch, we scrap the parts and we're late on deliveries. Last year it cost us a lot, and two of our aerospace customers made it very clear that delivery delays will affect future contracts.
+
+[Presales] I see. What would success look like in a year?
+
+[Nathalie] Fewer unplanned stops. If we could predict a failure a few days before it happens, we would schedule maintenance between batches. I'd say reducing unplanned downtime by 30% would be a real success.
+
+[Presales] And today, how do you know a machine is going to fail?
+
+[Julien] We mostly don't. The machines already have sensors, temperature, vibration, spindle load, but the data stays on each machine controller. Nobody looks at it across the three plants.
+
+[Presales] So the main functions would be collecting that data, analyzing it, and alerting the maintenance teams?
+
+[Nathalie] Yes. And a dashboard per plant and one for the whole group, so I can compare the plants.
+
+[Presales] Is this a new application, or are you replacing something?
+
+[Julien] It's new. Nothing like this exists today.
+
+[Presales] Is anything explicitly out of scope?
+
+[Julien] The machine control itself. The controllers drive the machines in real time, we won't change that. And the MES stays as it is.
+
+[Presales] Who would use the dashboards and the alerts?
+
+[Nathalie] The maintenance teams in each plant, about 40 people in total, plus the plant managers and me. So maybe 50 users, all internal.
+
+[Presales] How many machines are we talking about?
+
+[Julien] Around 400 across the three plants. Each one could send sensor readings every second.
+
+[Presales] Do you plan to add plants or machines?
+
+[Nathalie] We're opening a fourth plant in Toulouse in about two years.
+
+[Presales] When an alert is raised, how quickly does the maintenance team need to see it?
+
+[Julien] Within a minute or two is fine. We're predicting failures days in advance, it's not an emergency stop.
+
+[Presales] Is there anything that needs a much faster reaction?
+
+[Julien] Yes, one thing. On some machines we want to stop the spindle automatically if the vibration goes above a threshold. That has to react in under 10 milliseconds, and it has to work even if the internet connection is down. A plant cannot depend on the internet to protect a machine.
+
+[Presales] Understood, so that part has to run locally in the plant. And for the dashboards, if they're unavailable for an hour, what happens?
+
+[Nathalie] Nothing dramatic, as long as the local safety stop keeps working. We'd catch up later.
+
+[Presales] How long do you want to keep the sensor data?
+
+[Julien] The data scientists we're working with say they need at least two years of history to train the models properly.
+
+[Presales] Do you know roughly how big one reading is, or how much data a machine produces per day?
+
+[Julien] Not really. I'd have to ask the machine vendor.
+
+[Presales] Sophie, what are the security constraints on your side?
+
+[Sophie] The main one comes from our contracts. Technical drawings and machining programs for our defense customers must never leave our sites. That's non-negotiable.
+
+[Presales] Does that apply to the sensor data too?
+
+[Sophie] Sensor readings on their own, I'd say no, as long as they don't reveal which part is being machined. But that needs to be checked with our legal team. For everything else, the data must stay in France.
+
+[Presales] How do employees log in to applications today?
+
+[Sophie] Active Directory, on-premises. I don't want a separate set of accounts for this project.
+
+[Presales] Which systems would this need to connect to?
+
+[Julien] The SAP ERP, to create maintenance work orders automatically, and the MES, to know which batch is running on which machine. Both are on-premises, in our data center at the main plant.
+
+[Presales] What network connectivity do the plants have today?
+
+[Julien] Each plant has a 100 megabit fiber link to the internet. There's no backup link.
+
+[Presales] Who would operate the solution?
+
+[Julien] My team, five people. We know Windows Server and VMware very well. Linux a bit. The cloud, almost nothing.
+
+[Presales] Would you rather buy managed services or build and operate things yourselves?
+
+[Julien] Managed, clearly. We don't have the people to run complex infrastructure.
+
+[Presales] What's the timeline?
+
+[Nathalie] A pilot on 20 machines in the Bourges plant within six months. If it works, the other plants next year.
+
+[Presales] Is there a budget envelope for the pilot?
+
+[Nathalie] Not yet. It depends on what you propose. Our CFO will want to see the cost of the pilot and what a full deployment would cost.
+
+[Presales] Let me summarize. You want to predict machine failures to reduce unplanned downtime by 30%, with alerts and dashboards for about 50 internal users. The automatic safety stop must react in under 10 milliseconds and work without internet, so it runs in the plant. Drawings and machining programs never leave your sites, the rest of the data stays in France, and logins go through your Active Directory. You'll start with a pilot on 20 machines in Bourges within six months. Is that correct?
+
+[Sophie] Yes, with the point on sensor data still to confirm with legal.
+
+[Nathalie] That's it.
+
+[Presales] Open questions: the data volume per machine, the legal position on sensor data, how long the dashboards can be down, and the pilot budget. Julien, could you ask the machine vendor for the data format and frequency? Sophie, could you check the sensor data question with legal?
+
+[Julien] I'll ask them this week.
+
+[Sophie] I'll come back to you within two weeks.
+
+[Presales] Then I'll prepare a first hybrid architecture proposal for a review with your CFO.

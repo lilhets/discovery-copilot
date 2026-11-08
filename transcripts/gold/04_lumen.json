@@ -1,0 +1,192 @@
+{
+  "scenario": "04_lumen",
+  "transcript": "transcripts/scenarios/04_lumen.txt",
+  "requirements": [
+    {
+      "id": "R1",
+      "type": "functional",
+      "category": "feature",
+      "statement": "Customers can browse the catalog, search, create an account and check out.",
+      "evidence_quote": "Browse the catalog, search, create an account, checkout.",
+      "confidence": {
+        "level": "high",
+        "reason": "Listed explicitly."
+      }
+    },
+    {
+      "id": "R2",
+      "type": "functional",
+      "category": "feature",
+      "statement": "Back office for the team to manage products and orders.",
+      "evidence_quote": "There's also a back office where our team manages products and orders.",
+      "confidence": {
+        "level": "high",
+        "reason": "Mentioned explicitly."
+      }
+    },
+    {
+      "id": "R3",
+      "type": "functional",
+      "category": "scale",
+      "statement": "Support the launch in Belgium and Switzerland next year.",
+      "evidence_quote": "we're launching in Belgium and Switzerland next year",
+      "confidence": {
+        "level": "medium",
+        "reason": "Launch confirmed but no traffic figure for the new countries."
+      }
+    },
+    {
+      "id": "R4",
+      "type": "non_functional",
+      "category": "users",
+      "statement": "Baseline traffic of about 5,000 visitors per day.",
+      "evidence_quote": "A normal day we have around 5,000 visitors.",
+      "confidence": {
+        "level": "high",
+        "reason": "Figure given explicitly."
+      }
+    },
+    {
+      "id": "R5",
+      "type": "non_functional",
+      "category": "scale",
+      "statement": "Absorb about 10x normal traffic on Black Friday, concentrated in the evening.",
+      "evidence_quote": "On Black Friday we get maybe ten times our usual traffic, mostly between 6 and 10 pm.",
+      "confidence": {
+        "level": "high",
+        "reason": "Ratio and time window given explicitly."
+      }
+    },
+    {
+      "id": "R6",
+      "type": "non_functional",
+      "category": "latency",
+      "statement": "Pages load in under 2 seconds, including at peak.",
+      "evidence_quote": "I'd like pages to load in under two seconds, even on Black Friday.",
+      "confidence": {
+        "level": "high",
+        "reason": "Explicit numeric target."
+      }
+    },
+    {
+      "id": "R7",
+      "type": "non_functional",
+      "category": "availability",
+      "statement": "No downtime during Black Friday and sales periods; outages tolerated on normal days.",
+      "evidence_quote": "Those periods have to hold.",
+      "confidence": {
+        "level": "medium",
+        "reason": "Need is clear but no availability target was given."
+      }
+    },
+    {
+      "id": "R8",
+      "type": "non_functional",
+      "category": "compliance",
+      "statement": "Customer personal data (names, addresses, emails) stored in Europe.",
+      "evidence_quote": "I'd prefer it stays in Europe",
+      "confidence": {
+        "level": "medium",
+        "reason": "Stated as a preference, not a hard rule."
+      }
+    },
+    {
+      "id": "R9",
+      "type": "non_functional",
+      "category": "other",
+      "statement": "Simple enough to be operated by a 2-person team without cloud experience.",
+      "evidence_quote": "it can't be something too complex to operate",
+      "confidence": {
+        "level": "high",
+        "reason": "Stated explicitly."
+      }
+    },
+    {
+      "id": "R10",
+      "type": "non_functional",
+      "category": "timeline",
+      "statement": "Live before next Black Friday, ideally tested during the July sales.",
+      "evidence_quote": "It has to be ready before next Black Friday",
+      "confidence": {
+        "level": "high",
+        "reason": "Date given explicitly."
+      }
+    }
+  ],
+  "missing_info": [
+    {
+      "id": "M1",
+      "missing_info": "Budget envelope and current hosting cost.",
+      "why_it_matters": "Decides between a minimal, balanced or premium HA design.",
+      "requirement_ids": [],
+      "evidence_quote": "We're still working on that with Paul, our CEO.",
+      "blocking": false
+    },
+    {
+      "id": "M2",
+      "missing_info": "Database size and photo volume.",
+      "why_it_matters": "Sizing of the database and object storage, migration effort.",
+      "requirement_ids": [],
+      "evidence_quote": "The database, I'd have to check.",
+      "blocking": false
+    },
+    {
+      "id": "M3",
+      "missing_info": "RPO and RTO for orders.",
+      "why_it_matters": "Drives backup frequency and Multi-AZ replication.",
+      "requirement_ids": [
+        "R7"
+      ],
+      "evidence_quote": "I can't give you a number today.",
+      "blocking": true
+    },
+    {
+      "id": "M4",
+      "missing_info": "Expected traffic in Belgium and Switzerland.",
+      "why_it_matters": "Peak sizing for next year.",
+      "requirement_ids": [
+        "R3"
+      ],
+      "blocking": false
+    },
+    {
+      "id": "M5",
+      "missing_info": "Latency percentile and which pages the 2 s target applies to.",
+      "why_it_matters": "An average hides the slow requests; the target needs a p95 or p99 to be testable.",
+      "requirement_ids": [
+        "R6"
+      ],
+      "blocking": false
+    }
+  ],
+  "should_not_extract": [
+    {
+      "item": "Payment processing",
+      "reason": "Handled by the external payment provider, out of scope.",
+      "evidence_quote": "Payment. That stays with our payment provider"
+    },
+    {
+      "item": "Warehouse software",
+      "reason": "Explicitly out of scope.",
+      "evidence_quote": "And the warehouse software, we don't touch it."
+    },
+    {
+      "item": "Application rewrite",
+      "reason": "Mentioned as a possible later step, not for this project.",
+      "evidence_quote": "Maybe later."
+    }
+  ],
+  "constraints": [
+    "Migrate the existing PHP/MySQL application first, no rewrite before go-live",
+    "Nightly file export to the warehouse software must keep working",
+    "Two-person team, no cloud skills"
+  ],
+  "expected_risks": [
+    "Single database server, no redundancy",
+    "Manual FTP deployments, no CI/CD",
+    "No monitoring beyond the hoster's server-down email",
+    "Product photos stored on the application servers"
+  ],
+  "expected_deployment": "public_cloud",
+  "notes": "The copilot must NOT invent a budget, a database size or an RPO."
+}

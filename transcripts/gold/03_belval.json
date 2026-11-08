@@ -1,0 +1,193 @@
+{
+  "scenario": "03_belval",
+  "transcript": "transcripts/scenarios/03_belval.txt",
+  "requirements": [
+    {
+      "id": "R1",
+      "type": "functional",
+      "category": "feature",
+      "statement": "Chatbot on drivers' phones answering recurring questions (delivery location, customer opening hours, absent customer procedure).",
+      "evidence_quote": "If they could ask a chatbot on their phone, it would free up a lot of our time.",
+      "confidence": {
+        "level": "medium",
+        "reason": "Use case is clear but the content the chatbot relies on is not defined."
+      }
+    },
+    {
+      "id": "R2",
+      "type": "functional",
+      "category": "feature",
+      "statement": "Host the transport management software, accounting and shared files without an on-premises server.",
+      "evidence_quote": "I want to get rid of the server room completely.",
+      "confidence": {
+        "level": "medium",
+        "reason": "Clear wish, but it conflicts with the data location statement."
+      }
+    },
+    {
+      "id": "R3",
+      "type": "non_functional",
+      "category": "users",
+      "statement": "About 80 drivers using the chatbot and about 15 office staff.",
+      "evidence_quote": "The drivers, about 80 of them. And the office staff, maybe 15 people",
+      "confidence": {
+        "level": "high",
+        "reason": "Figures given explicitly."
+      }
+    },
+    {
+      "id": "R4",
+      "type": "non_functional",
+      "category": "scale",
+      "statement": "Peak usage early morning, 5 am to 8 am.",
+      "evidence_quote": "Early morning, from 5 to 8, when the tours start.",
+      "confidence": {
+        "level": "high",
+        "reason": "Time window given explicitly."
+      }
+    },
+    {
+      "id": "R5",
+      "type": "non_functional",
+      "category": "availability",
+      "statement": "Must be available during morning departures; no usage at night.",
+      "evidence_quote": "The mornings are what matters.",
+      "confidence": {
+        "level": "medium",
+        "reason": "Critical period is clear but the CEO and office manager disagree on the rest."
+      }
+    },
+    {
+      "id": "R6",
+      "type": "non_functional",
+      "category": "other",
+      "statement": "Chatbot wrong answers have a real cost (wrong dock, misplaced pallet), so answers must be reliable.",
+      "evidence_quote": "A driver goes to the wrong dock or leaves a pallet in the wrong place.",
+      "confidence": {
+        "level": "medium",
+        "reason": "Impact of errors is clear but no accuracy target was given."
+      }
+    },
+    {
+      "id": "R7",
+      "type": "non_functional",
+      "category": "other",
+      "statement": "Operated by a non-technical office manager with occasional help from a local IT company.",
+      "evidence_quote": "I'm not technical, I learned on the job.",
+      "confidence": {
+        "level": "high",
+        "reason": "Stated explicitly."
+      }
+    },
+    {
+      "id": "R8",
+      "type": "non_functional",
+      "category": "timeline",
+      "statement": "Server warranty ends in June (to be confirmed), a natural deadline for the migration.",
+      "evidence_quote": "The server warranty ends in June, I think.",
+      "confidence": {
+        "level": "low",
+        "reason": "Date given with uncertainty (\"I think\")."
+      }
+    }
+  ],
+  "missing_info": [
+    {
+      "id": "M1",
+      "missing_info": "Budget envelope and current IT cost.",
+      "why_it_matters": "'As cheap as possible' gives no ceiling; needed to choose between options.",
+      "requirement_ids": [],
+      "evidence_quote": "I told you, as cheap as possible.",
+      "blocking": true
+    },
+    {
+      "id": "M2",
+      "missing_info": "Volume of driver calls and the content the chatbot should rely on.",
+      "why_it_matters": "Sizes the chatbot and shows whether a knowledge base exists to ground its answers.",
+      "requirement_ids": [
+        "R1"
+      ],
+      "evidence_quote": "I've never counted.",
+      "blocking": false
+    },
+    {
+      "id": "M3",
+      "missing_info": "Transport management software name, version and cloud compatibility.",
+      "why_it_matters": "Decides whether it can be migrated as is, replaced by SaaS, or must stay on-premises.",
+      "requirement_ids": [
+        "R2"
+      ],
+      "evidence_quote": "No idea. I'd have to ask them.",
+      "blocking": true
+    },
+    {
+      "id": "M4",
+      "missing_info": "Realistic RPO and RTO.",
+      "why_it_matters": "'Cannot lose any data' is not a usable target; needs a choice between scenarios with costs.",
+      "requirement_ids": [
+        "R5"
+      ],
+      "evidence_quote": "We cannot lose any data. Ever.",
+      "blocking": true
+    },
+    {
+      "id": "M5",
+      "missing_info": "Regulatory or contractual constraints behind the data location requirement.",
+      "why_it_matters": "Decides whether a French AWS Region is acceptable or data must really stay on-site.",
+      "requirement_ids": [],
+      "evidence_quote": "Our data must stay here, in our offices.",
+      "blocking": true
+    },
+    {
+      "id": "M6",
+      "missing_info": "Concrete success metric for the AI part.",
+      "why_it_matters": "'Less time on the phone' needs a baseline and a target to measure value.",
+      "requirement_ids": [
+        "R1"
+      ],
+      "evidence_quote": "I don't know exactly.",
+      "blocking": false
+    }
+  ],
+  "should_not_extract": [],
+  "constraints": [
+    "Very limited internal IT skills",
+    "Transport management software vendor and cloud support unknown"
+  ],
+  "planted_issues": [
+    {
+      "id": "C1",
+      "type": "contradiction",
+      "description": "Data must stay in the company's offices, but the CEO wants to get rid of the server room and stop managing machines",
+      "evidence_quotes": [
+        "Our data must stay here, in our offices.",
+        "I want to get rid of the server room completely."
+      ]
+    },
+    {
+      "id": "C2",
+      "type": "contradiction",
+      "description": "Zero data loss and permanent availability requested, but with the lowest possible cost",
+      "evidence_quotes": [
+        "We cannot lose any data. Ever.",
+        "But it has to be as cheap as possible, we're a small company."
+      ]
+    },
+    {
+      "id": "C3",
+      "type": "inconsistency",
+      "description": "CEO says the system must work all the time, office manager says nobody uses it at night",
+      "evidence_quotes": [
+        "It has to work all the time.",
+        "Honestly, at night nobody uses it."
+      ]
+    }
+  ],
+  "expected_risks": [
+    "Single on-premises server, maintained only on break-fix by an external company",
+    "Chatbot errors have operational cost; needs grounding on validated content and a fallback to a human",
+    "No internal owner with technical skills"
+  ],
+  "expected_deployment": "needs_clarification",
+  "notes": "The copilot must NOT pick a deployment model with confidence. It must surface contradictions C1 and C2 as clarifying questions, must not invent a budget, an RPO or a call volume, and must not treat 'we want AI' as a requirement on its own."
+}

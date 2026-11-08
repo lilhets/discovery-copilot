@@ -1,0 +1,271 @@
+{
+  "scenario": "02_verdan",
+  "transcript": "transcripts/scenarios/02_verdan.txt",
+  "requirements": [
+    {
+      "id": "R1",
+      "type": "functional",
+      "category": "feature",
+      "statement": "Collect sensor data (temperature, vibration, spindle load) from the machines across the 3 plants.",
+      "evidence_quote": "The machines already have sensors, temperature, vibration, spindle load",
+      "confidence": {
+        "level": "high",
+        "reason": "Sensors listed explicitly; collecting the data is the core of the project."
+      }
+    },
+    {
+      "id": "R2",
+      "type": "functional",
+      "category": "feature",
+      "statement": "Predict machine failures a few days in advance and alert maintenance teams.",
+      "evidence_quote": "If we could predict a failure a few days before it happens",
+      "confidence": {
+        "level": "high",
+        "reason": "Stated explicitly as the main goal."
+      }
+    },
+    {
+      "id": "R3",
+      "type": "functional",
+      "category": "feature",
+      "statement": "Dashboards per plant and one consolidated group dashboard.",
+      "evidence_quote": "a dashboard per plant and one for the whole group",
+      "confidence": {
+        "level": "high",
+        "reason": "Asked for explicitly by the Director of Operations."
+      }
+    },
+    {
+      "id": "R4",
+      "type": "functional",
+      "category": "feature",
+      "statement": "Automatically create maintenance work orders in the on-premises SAP ERP.",
+      "evidence_quote": "The SAP ERP, to create maintenance work orders automatically",
+      "confidence": {
+        "level": "medium",
+        "reason": "Need is clear but the SAP interface is unknown."
+      }
+    },
+    {
+      "id": "R5",
+      "type": "functional",
+      "category": "feature",
+      "statement": "Read from the on-premises MES which batch runs on which machine.",
+      "evidence_quote": "the MES, to know which batch is running on which machine",
+      "confidence": {
+        "level": "medium",
+        "reason": "Need is clear but the MES interface is unknown."
+      }
+    },
+    {
+      "id": "R6",
+      "type": "functional",
+      "category": "latency",
+      "statement": "Automatic spindle stop when vibration exceeds a threshold, running locally in the plant.",
+      "evidence_quote": "That has to react in under 10 milliseconds, and it has to work even if the internet connection is down.",
+      "confidence": {
+        "level": "high",
+        "reason": "Explicit numeric target and explicit offline constraint."
+      }
+    },
+    {
+      "id": "R7",
+      "type": "non_functional",
+      "category": "other",
+      "statement": "Reduce unplanned machine downtime by 30%.",
+      "evidence_quote": "reducing unplanned downtime by 30% would be a real success",
+      "confidence": {
+        "level": "high",
+        "reason": "Explicit business target."
+      }
+    },
+    {
+      "id": "R8",
+      "type": "non_functional",
+      "category": "users",
+      "statement": "About 50 internal users (maintenance teams, plant managers, operations director).",
+      "evidence_quote": "So maybe 50 users, all internal.",
+      "confidence": {
+        "level": "high",
+        "reason": "Figure given explicitly, even if approximate."
+      }
+    },
+    {
+      "id": "R9",
+      "type": "non_functional",
+      "category": "scale",
+      "statement": "Around 400 machines sending readings every second.",
+      "evidence_quote": "Around 400 across the three plants. Each one could send sensor readings every second.",
+      "confidence": {
+        "level": "medium",
+        "reason": "Machine count is clear but the size of a reading is unknown."
+      }
+    },
+    {
+      "id": "R10",
+      "type": "non_functional",
+      "category": "scale",
+      "statement": "Add a fourth plant in Toulouse in about two years.",
+      "evidence_quote": "We're opening a fourth plant in Toulouse in about two years.",
+      "confidence": {
+        "level": "medium",
+        "reason": "Plant announced but no figure for its machines."
+      }
+    },
+    {
+      "id": "R11",
+      "type": "non_functional",
+      "category": "latency",
+      "statement": "Predictive alerts visible to maintenance within one to two minutes.",
+      "evidence_quote": "Within a minute or two is fine.",
+      "confidence": {
+        "level": "high",
+        "reason": "Explicit target."
+      }
+    },
+    {
+      "id": "R12",
+      "type": "non_functional",
+      "category": "availability",
+      "statement": "Dashboards tolerate outages as long as the local safety stop keeps working.",
+      "evidence_quote": "Nothing dramatic, as long as the local safety stop keeps working.",
+      "confidence": {
+        "level": "medium",
+        "reason": "Tolerance is clear but no downtime figure was given."
+      }
+    },
+    {
+      "id": "R13",
+      "type": "non_functional",
+      "category": "data",
+      "statement": "Keep at least two years of sensor history for model training.",
+      "evidence_quote": "they need at least two years of history to train the models properly",
+      "confidence": {
+        "level": "high",
+        "reason": "Retention stated explicitly."
+      }
+    },
+    {
+      "id": "R14",
+      "type": "non_functional",
+      "category": "compliance",
+      "statement": "Technical drawings and machining programs for defense customers never leave the company's sites.",
+      "evidence_quote": "Technical drawings and machining programs for our defense customers must never leave our sites.",
+      "confidence": {
+        "level": "high",
+        "reason": "Stated as non-negotiable."
+      }
+    },
+    {
+      "id": "R15",
+      "type": "non_functional",
+      "category": "compliance",
+      "statement": "All other data stays in France.",
+      "evidence_quote": "For everything else, the data must stay in France.",
+      "confidence": {
+        "level": "high",
+        "reason": "Stated explicitly by the security officer."
+      }
+    },
+    {
+      "id": "R16",
+      "type": "non_functional",
+      "category": "compliance",
+      "statement": "Authentication through the existing on-premises Active Directory, no separate accounts.",
+      "evidence_quote": "I don't want a separate set of accounts for this project.",
+      "confidence": {
+        "level": "high",
+        "reason": "Stated explicitly."
+      }
+    },
+    {
+      "id": "R17",
+      "type": "non_functional",
+      "category": "other",
+      "statement": "Prefer managed services; team of 5 with Windows and VMware skills, little cloud experience.",
+      "evidence_quote": "Managed, clearly. We don't have the people to run complex infrastructure.",
+      "confidence": {
+        "level": "high",
+        "reason": "Stated explicitly as a preference."
+      }
+    },
+    {
+      "id": "R18",
+      "type": "non_functional",
+      "category": "timeline",
+      "statement": "Pilot on 20 machines in the Bourges plant within six months, other plants next year.",
+      "evidence_quote": "A pilot on 20 machines in the Bourges plant within six months.",
+      "confidence": {
+        "level": "high",
+        "reason": "Scope and date given explicitly."
+      }
+    }
+  ],
+  "missing_info": [
+    {
+      "id": "M1",
+      "missing_info": "Size of a sensor reading and daily data volume per machine.",
+      "why_it_matters": "Sizes ingestion, storage over 2 years, and whether 100 Mbps per plant is enough.",
+      "requirement_ids": [
+        "R9",
+        "R13"
+      ],
+      "evidence_quote": "Not really. I'd have to ask the machine vendor.",
+      "blocking": true
+    },
+    {
+      "id": "M2",
+      "missing_info": "Whether sensor data is allowed to leave the sites (legal position pending).",
+      "why_it_matters": "Decides how much of the analytics can run in the cloud vs on-premises.",
+      "requirement_ids": [
+        "R15"
+      ],
+      "evidence_quote": "But that needs to be checked with our legal team.",
+      "blocking": true
+    },
+    {
+      "id": "M3",
+      "missing_info": "Acceptable downtime and data loss for the cloud analytics part (RTO/RPO).",
+      "why_it_matters": "Decides single-AZ vs Multi-AZ and local buffering during link outages.",
+      "requirement_ids": [
+        "R12"
+      ],
+      "blocking": false
+    },
+    {
+      "id": "M4",
+      "missing_info": "Pilot budget and full deployment budget.",
+      "why_it_matters": "Frames the pilot design and the business case for the CFO.",
+      "requirement_ids": [],
+      "evidence_quote": "Not yet. It depends on what you propose.",
+      "blocking": false
+    }
+  ],
+  "should_not_extract": [
+    {
+      "item": "Real-time machine control",
+      "reason": "Explicitly out of scope, the controllers stay as they are.",
+      "evidence_quote": "The machine control itself."
+    },
+    {
+      "item": "Changes to the MES",
+      "reason": "Explicitly out of scope.",
+      "evidence_quote": "And the MES stays as it is."
+    }
+  ],
+  "constraints": [
+    "Safety stop must run locally in each plant and work without internet",
+    "Drawings and machining programs stay on-premises",
+    "Data residency: France",
+    "SAP ERP and MES are on-premises in the main plant's data center",
+    "Each plant has a single 100 Mbps internet link"
+  ],
+  "expected_risks": [
+    "Single internet link per plant: a link failure cuts data flow to the cloud (needs local buffering or a backup link)",
+    "Legal status of sensor data unconfirmed, could force a mostly on-premises design",
+    "Team has very little cloud experience",
+    "Data volume unknown, bandwidth may be insufficient at full scale"
+  ],
+  "expected_deployment": "hybrid",
+  "notes": "The copilot must keep the safety stop on-premises (edge) and must NOT place drawings or machining programs in the cloud. It must not invent a data volume or a budget."
+}
