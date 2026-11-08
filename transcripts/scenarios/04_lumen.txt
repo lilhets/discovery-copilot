@@ -1,0 +1,130 @@
+Scenario 04: Maison Lumen, online home decor retailer
+Type: classic cloud workload (web shop migration)
+Call: first discovery call, 60 minutes, video
+Participants:
+  - Presales: presales engineer
+  - Claire (Head of E-commerce, Maison Lumen)
+  - Karim (IT lead, Maison Lumen)
+All companies and people in this transcript are fictional.
+
+---
+
+[Presales] Thanks to you both for your time. The goal today is to understand your situation, not to propose a solution yet. I'd like to start with your context, then go into the technical side, talk about constraints, and finish with a short summary and next steps. We have an hour, is that still fine for you?
+
+[Claire] Yes, perfect.
+
+[Presales] To start, what business problem are you trying to solve, and why now?
+
+[Claire] Last Black Friday the site went down for almost two hours in the evening, right at the peak. We estimate we lost around 80,000 euros in sales, plus a lot of negative comments on social media. We don't want to go through that again.
+
+[Presales] I understand, that's a significant impact. What would success look like for you in twelve months?
+
+[Claire] A Black Friday without incident, and pages that stay fast. Also we're launching in Belgium and Switzerland next year, so the platform has to follow.
+
+[Presales] How will you measure it?
+
+[Claire] Mainly the conversion rate on peak days. And cart abandonment.
+
+[Presales] What are the main things customers do on the site?
+
+[Karim] Browse the catalog, search, create an account, checkout. There's also a back office where our team manages products and orders.
+
+[Presales] Is the idea to move the existing application as it is, or to rebuild it?
+
+[Karim] Move it first. We don't have time to rewrite it before next November. Maybe later.
+
+[Presales] Is anything explicitly out of scope?
+
+[Karim] Payment. That stays with our payment provider, the card data never touches our servers. And the warehouse software, we don't touch it.
+
+[Presales] Let's talk about traffic. What does a normal day look like compared with your busiest day?
+
+[Karim] A normal day we have around 5,000 visitors. On Black Friday we get maybe ten times our usual traffic, mostly between 6 and 10 pm.
+
+[Presales] Are there other peaks during the year?
+
+[Claire] The winter and summer sales, a bit lower than Black Friday. And each newsletter creates a small spike.
+
+[Presales] Where are your customers located?
+
+[Claire] France only for now. Belgium and Switzerland next year, as I said.
+
+[Presales] What's running the site today?
+
+[Karim] A PHP application, a bit old, on two servers we rent from a hosting company in Lyon. The MySQL database is on one of them. When it gets busy we call the hoster and ask for a bigger machine, but that takes several days.
+
+[Presales] How big are the catalog and the database?
+
+[Karim] About 12,000 products. The database, I'd have to check. The product photos are on the same servers.
+
+[Presales] You mentioned the site gets slow. What do customers actually experience?
+
+[Claire] Pages take several seconds to load, and sometimes the checkout times out. People abandon their cart.
+
+[Presales] What would be acceptable for you?
+
+[Claire] I'd like pages to load in under two seconds, even on Black Friday.
+
+[Presales] If the site is down for an hour on a normal Tuesday, what happens?
+
+[Claire] It's annoying but not dramatic. On Black Friday or during the sales, it's a disaster. Those periods have to hold.
+
+[Presales] And if the system failed right now, would losing the last few minutes of orders be a disaster or an annoyance?
+
+[Karim] It's a problem, those customers paid. The payment provider keeps a record, but rebuilding orders by hand would be painful. I can't give you a number today.
+
+[Presales] That's fine, I'll note it as an open question.
+
+[Presales] What data do you store?
+
+[Karim] Orders and customer accounts, so names, addresses, emails.
+
+[Presales] Is there any constraint on where it's stored?
+
+[Claire] I'd prefer it stays in Europe, all our customers are European.
+
+[Presales] How do customers log in today?
+
+[Karim] Email and password, managed directly in the application.
+
+[Presales] Which other systems does the site talk to?
+
+[Karim] The payment provider, our emailing tool, and the warehouse software through a file export every night.
+
+[Presales] Who runs the platform day to day?
+
+[Karim] Me and one developer. Nobody here really knows the cloud, so it can't be something too complex to operate.
+
+[Presales] How do you deploy a new version today?
+
+[Karim] By hand, over FTP mostly. I know, it's not ideal.
+
+[Presales] And how do you find out when something goes wrong?
+
+[Karim] The hoster sends us an email when a server is down. That's about it.
+
+[Presales] In terms of timing, is there a target date?
+
+[Claire] It has to be ready before next Black Friday, so end of November next year. Ideally we'd test it during the summer sales in July.
+
+[Presales] Is there a budget envelope, or a current cost we should compare with?
+
+[Claire] We're still working on that with Paul, our CEO. We'll come back to you on that.
+
+[Presales] Who approves the budget, and what will he need to see?
+
+[Claire] Paul signs. He'll want a monthly cost and a comparison with what we pay the hoster today.
+
+[Presales] Let me summarize to check I understood. Your top three needs are: hold Black Friday and the sales without downtime, keep pages under two seconds even at peak, and have a platform that can follow the launch in Belgium and Switzerland. The constraints are: data in Europe, a two-person team without cloud experience, and a go-live before next Black Friday with a test in July. Did I miss anything?
+
+[Karim] Just that we keep the application as it is for now.
+
+[Presales] Noted, migration first, modernization later.
+
+[Presales] I have a few open questions: the size of the database and the photos, how many orders you could afford to lose, the traffic you expect in the new countries, and the budget. Karim, could you send me the database size and your traffic statistics from last Black Friday by next Friday?
+
+[Karim] Sure, no problem.
+
+[Presales] Then I'll come back with a first architecture proposal, and we'll set up a review with Paul.
+
+[Claire] Sounds good, thank you.

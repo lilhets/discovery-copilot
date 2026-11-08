@@ -1,0 +1,108 @@
+Scenario 03: Transports Belval, regional road freight company
+Type: messy (vague needs, contradictions, missing information)
+Call: first discovery call, 45 minutes, on site
+Participants:
+  - Presales: presales engineer
+  - Gérard (CEO, Transports Belval)
+  - Martine (office manager, also in charge of IT, Transports Belval)
+All companies and people in this transcript are fictional.
+
+---
+
+[Presales] Thank you for having me. The goal today is to understand your situation and what you're looking for, I won't be presenting a solution yet. We'll talk about your context, your current systems, your constraints, and I'll finish with a summary. We have an hour, is that right?
+
+[Gérard] Probably less, I have a call at eleven. Let's go.
+
+[Presales] Understood, I'll keep it focused. What made you reach out now?
+
+[Gérard] Everyone is going to the cloud, and we're still running on a server in a cupboard. And I want AI. Our competitors are starting to use it, I don't want to be left behind.
+
+[Presales] That makes sense. When you say AI, which task or decision would you like to become faster or better?
+
+[Gérard] I don't know exactly. Something that helps the office. Martine, you had an idea?
+
+[Martine] The drivers call us all day with the same questions. Where to deliver, opening hours of the customer, what to do if the customer is absent. If they could ask a chatbot on their phone, it would free up a lot of our time.
+
+[Presales] How many calls like that do you get?
+
+[Martine] I've never counted. A lot. Dozens a day, easily.
+
+[Presales] And if the chatbot gives a wrong answer, what's the consequence?
+
+[Martine] A driver goes to the wrong dock or leaves a pallet in the wrong place. It happens with humans too, but it costs us.
+
+[Presales] What would success look like in a year?
+
+[Gérard] We're modern, we don't depend on that server anymore, and the office spends less time on the phone.
+
+[Presales] What runs on the server today?
+
+[Martine] The transport management software, the accounting, and the shared files. The software was installed by a local IT company years ago. They come when something breaks.
+
+[Presales] Do you know which version of the software it is, and whether the vendor supports the cloud?
+
+[Martine] No idea. I'd have to ask them.
+
+[Presales] Is the goal to move those applications to the cloud, or mainly to build the chatbot?
+
+[Gérard] Everything. I want to get rid of the server room completely. I don't want to manage machines anymore.
+
+[Presales] Who would use the chatbot?
+
+[Martine] The drivers, about 80 of them. And the office staff, maybe 15 people, for the software and files.
+
+[Presales] When are they most active?
+
+[Martine] Early morning, from 5 to 8, when the tours start. After that it's calmer.
+
+[Presales] If the system is down for an hour, what happens?
+
+[Gérard] It can't happen. It has to work all the time.
+
+[Presales] I understand. To size it properly, is that true 24 hours a day, or mainly during the morning departures?
+
+[Martine] Honestly, at night nobody uses it. The mornings are what matters.
+
+[Presales] And regarding data, if you lost the last hour of data, would that be a disaster or an annoyance?
+
+[Gérard] We cannot lose any data. Ever.
+
+[Presales] I'll note that. In practice, zero data loss is the most expensive option, so we'll come back to it with two or three scenarios and their costs, so you can choose.
+
+[Gérard] Fine. But it has to be as cheap as possible, we're a small company.
+
+[Presales] What kind of data do you handle?
+
+[Martine] Customer addresses, delivery details, driver information, and the accounting.
+
+[Presales] Are there constraints on where the data is stored?
+
+[Gérard] Our data must stay here, in our offices. I don't want our customer data sitting somewhere I don't control.
+
+[Presales] Understood. Just to be sure I've got it right: you also mentioned wanting to get rid of the server room. Can we come back to how those two fit together?
+
+[Gérard] We'll see. Martine, you'll handle the details with them.
+
+[Presales] Martine, who would manage the solution day to day?
+
+[Martine] Me, and the IT company when needed. I'm not technical, I learned on the job.
+
+[Presales] Is there a deadline?
+
+[Gérard] As soon as possible.
+
+[Presales] Is there an event that would make a date important, like the end of a contract or the server reaching end of life?
+
+[Martine] The server warranty ends in June, I think.
+
+[Presales] And is there a budget envelope, or a current IT cost we can compare with?
+
+[Gérard] I told you, as cheap as possible. Send me a proposal and we'll see.
+
+[Presales] Let me summarize quickly. You'd like to stop running your own server, possibly before the warranty ends in June, and you'd like a chatbot to answer the drivers' recurring questions. The critical period is the morning departures. Two points still need to be clarified: where the data must be stored, and how much data loss and cost you're ready to accept. Does that sound right?
+
+[Gérard] Yes. I have to go. Martine will follow up.
+
+[Presales] Martine, could you send me the name and version of the transport software, a rough count of driver calls over one week, and the contact of the IT company? I'll come back with a few options and the questions we still need to settle.
+
+[Martine] I'll try to do that next week.
