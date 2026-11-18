@@ -1,13 +1,4 @@
-"""Score a step 1 run against its gold file: requirement recall and precision.
-
-Matching is by content, not by ID number (ADR 0001), and it is checked by hand:
-
-1. python eval/score_step1.py eval/runs/<run>.json
-   First call: writes eval/matches/<run>.json with a suggested match for each predicted
-   requirement (gold ID, or null when nothing in the gold fits). Review and fix it by hand.
-2. python eval/score_step1.py eval/runs/<run>.json
-   Once the matches file exists: computes the metrics from it.
-"""
+"""Score a step 1 run against its gold file (recall, precision)."""
 import json
 import re
 import sys

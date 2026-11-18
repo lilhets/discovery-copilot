@@ -1,8 +1,4 @@
-"""Step 1: extract requirements from a transcript.
-
-Local run:
-    python backend/functions/step1_requirements/handler.py transcripts/scenarios/01_ludora.txt
-"""
+"""Step 1: extract requirements from a transcript."""
 import json
 import sys
 from datetime import datetime, timezone

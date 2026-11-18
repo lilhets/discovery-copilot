@@ -1,4 +1,4 @@
-"""Checks on step outputs: JSON schema first, then what the schema can't express (ADR 0001)."""
+"""Step output checks: JSON schema, unique IDs, verbatim quotes."""
 import json
 from pathlib import Path
 
@@ -17,7 +17,6 @@ def _registry():
 
 
 def validate_requirements(data, transcript):
-    """Return a list of problems. Empty list means the output is usable."""
     schema = json.loads((SCHEMAS_DIR / "requirements.schema.json").read_text())
     validator = Draft202012Validator(schema, registry=_registry())
     errors = [f"{'/'.join(map(str, e.path)) or '<root>'}: {e.message}" for e in validator.iter_errors(data)]
