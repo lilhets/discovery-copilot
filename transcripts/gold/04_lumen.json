@@ -111,6 +111,28 @@
         "level": "high",
         "reason": "Date given explicitly."
       }
+    },
+    {
+      "id": "R11",
+      "type": "functional",
+      "category": "feature",
+      "statement": "Migrate the existing PHP / MySQL application as is, without a rewrite before go-live.",
+      "evidence_quote": "Move it first. We don't have time to rewrite it before next November.",
+      "confidence": {
+        "level": "high",
+        "reason": "Stated explicitly by the IT lead and confirmed in the playback."
+      }
+    },
+    {
+      "id": "R12",
+      "type": "functional",
+      "category": "feature",
+      "statement": "Keep the nightly file export to the warehouse software working.",
+      "evidence_quote": "the warehouse software through a file export every night",
+      "confidence": {
+        "level": "medium",
+        "reason": "Integration is clear but the file format and volume are unknown."
+      }
     }
   ],
   "missing_info": [
@@ -176,11 +198,7 @@
       "evidence_quote": "Maybe later."
     }
   ],
-  "constraints": [
-    "Migrate the existing PHP/MySQL application first, no rewrite before go-live",
-    "Nightly file export to the warehouse software must keep working",
-    "Two-person team, no cloud skills"
-  ],
+  "constraints": [],
   "expected_risks": [
     "Single database server, no redundancy",
     "Manual FTP deployments, no CI/CD",
