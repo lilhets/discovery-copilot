@@ -7,11 +7,10 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[3]
 sys.path.insert(0, str(ROOT / "backend"))
 
-from llm import call_llm  # noqa: E402
+from llm import call_llm, extract_json  # noqa: E402
 from validation import validate_requirements  # noqa: E402
 
-PROMPT_VERSION = "step1_requirements.v1"
-
+PROMPT_VERSION = "step1_requirements.v2"
 
 def run_step1(transcript):
     system = (ROOT / "prompts" / f"{PROMPT_VERSION}.md").read_text()
@@ -19,7 +18,7 @@ def run_step1(transcript):
     result = call_llm(system, user)
 
     try:
-        output = json.loads(result.text)
+        output = extract_json(result.text)
         errors = validate_requirements(output, transcript)
     except json.JSONDecodeError as e:
         output, errors = None, [f"invalid JSON: {e}"]
@@ -49,6 +48,7 @@ if __name__ == "__main__":
 
     stamp = datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%SZ")
     out = ROOT / "eval" / "runs" / f"{stamp}_{transcript_path.stem}_step1.json"
+    out.parent.mkdir(parents=True, exist_ok=True)
     out.write_text(json.dumps(run, indent=2, ensure_ascii=False) + "\n")
 
     print(f"valid={run['valid']} tokens in/out={run['usage']['input_tokens']}/{run['usage']['output_tokens']} "

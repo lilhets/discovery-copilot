@@ -1,5 +1,6 @@
 """Bedrock model calls (Converse API), with token and latency logging."""
 import os
+import json
 import time
 from dataclasses import dataclass
 
@@ -59,3 +60,10 @@ def call_llm(system, user, max_tokens=4096):
         latency_s=round(latency, 2),
         stop_reason=stop_reason,
     )
+
+def extract_json(text):
+    text = text.strip()
+    if text.startswith("```"):
+        text = text.split("\n", 1)[1]
+        text = text.rsplit("```", 1)[0]
+    return json.loads(text)

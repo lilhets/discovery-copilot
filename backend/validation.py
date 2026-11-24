@@ -1,11 +1,13 @@
 """Step output checks: JSON schema, unique IDs, verbatim quotes."""
 import json
+import re
 from pathlib import Path
 
 from jsonschema import Draft202012Validator
 from referencing import Registry, Resource
 
 SCHEMAS_DIR = Path(__file__).resolve().parents[1] / "schemas"
+_EDGE_CHARS = " .,;:!?\"'«»()[]-…"
 
 
 def _registry():
@@ -14,6 +16,17 @@ def _registry():
         schema = json.loads(path.read_text())
         registry = registry.with_resource(schema["$id"], Resource.from_contents(schema))
     return registry
+
+
+def _normalize(text):
+    text = text.replace("\u2019", "'").replace("\u2018", "'").replace("\u201c", '"').replace("\u201d", '"')
+    return re.sub(r"\s+", " ", text).lower()
+
+
+def quote_in_transcript(quote, transcript):
+    """Verbatim match, ignoring case, whitespace and punctuation at the quote's edges."""
+    q = _normalize(quote).strip(_EDGE_CHARS)
+    return bool(q) and q in _normalize(transcript)
 
 
 def validate_requirements(data, transcript):
@@ -28,6 +41,6 @@ def validate_requirements(data, transcript):
     if duplicates:
         errors.append(f"duplicate ids: {', '.join(duplicates)}")
     for r in data["requirements"]:
-        if r["evidence_quote"] not in transcript:
+        if not quote_in_transcript(r["evidence_quote"], transcript):
             errors.append(f"{r['id']}: evidence_quote not found verbatim in transcript")
     return errors
